@@ -1,0 +1,71 @@
+
+<!-- ---------------------------------------- [edit] ---------------------------------------- -->
+{% extends 'base.html' %}
+{% block content %}
+<!-- ---------------------------------------------------------------------------------------- -->
+{% load static %}
+<style>
+body {
+  font-family: sans-serif;
+}
+
+canvas {
+  margin-left: 40px;
+  max-width: 100%;
+  width: 480px;
+}
+
+video {
+  max-width: 100%;
+  width: 480px;
+}
+</style>
+
+<div class="container" style="margin-top:20px">
+  <h1></h1>
+  <p></p>
+  
+  {%csrf_token%}
+  <h1>Realtime communication with WebRTC</h1>
+  <p>
+    <span id="Longitude"></span>
+    <span id="Latitude"></span>
+    <span id="addr_name"></span>
+  </p>  
+
+  <div id="videoCanvas" >
+    <video id="camera" autoplay playsinline></video>
+    <canvas id="photo"></canvas>
+  </div>
+
+  <div id="buttons" style="width:400px; margin-top:10px">
+    <button  class="btn btn-primary" id="snapAndSend">Start</button> 
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button  class="btn btn-primary" id="stop">stop</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <span>interval</span>
+    <select name="interval" id="interval" onchange="snapPhoto()">
+      <option value="1000">선택</option>
+      <option value="3000">3초</option>
+      <option value="5000">5초</option>
+    </select>
+
+  </div>
+
+  <p id="longitude">
+  </p>
+  
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  <script src="{% static '/js/main.js' %}"></script> <!--경로 static/js/main.js-->
+
+</body>
+
+</html>
+<script>
+  $(document).ready(function(){
+    console.log("ddd")
+    grabWebCamVideo();
+  });
+  </script>
+
+  {% endblock %}

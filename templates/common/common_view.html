@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container" style="margin-top:20px">
+  <h2>촬영 이미지 상세보기</h2>
+  <p></p>
+  <form name="form">   
+    <input type="hidden" name="sel" id="sel" value="{{sel}}">
+    <input type="hidden" name="key" id="key" value="{{key}}">
+    <input type="hidden" name="page" id="page" value="{{page}}">
+
+  <table class="table">
+  	<colgroup>
+  		<col width="25%"/>
+  		<col width="*"/>
+  	</colgroup>
+    
+    <tbody>
+            
+     <tr>
+      	<td>촬영일,시간 </td>
+        <td>{{common_item.wdate}}
+  		</td>
+     </tr>
+     <tr>
+      	<td>드론 ID</td>
+        <td>{{common_item.dron_id}}
+  		</td>
+     </tr>        
+      <tr >
+        <td>GPS(위도/경도)</td>
+        <td>위도 :&nbsp;{{common_item.x}}&nbsp;&nbsp; 경도 :&nbsp;{{common_item.y}}</td>
+     
+      </tr>
+      <tr >
+        <td>주소</td>
+        <td>{{common_item.address}}</td>
+     
+      </tr>
+      <tr >
+        <td>IP주소</td>
+        <td>{{common_item.ip_address}}</td>
+      </tr>
+      <tr >
+        <td>이미지명 </td>
+        <td>{{common_item.img_name}}</td>
+      
+      </tr>
+      <tr ><!-- <img src="\upload\2020\09\15\1\ -->
+        <td>이미지 상세보기</td>
+        <td><img src="\upload\{{common_item.date}}\{{common_item.img_name}}">
+        </td>
+      
+      </tr>
+     
+       
+       <tr >
+        <td></td>
+        <td></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  
+  	<div class="container" style="text-align:right">
+	  <div class="btn-group">
+	    
+	    
+	    <button type="button" class="btn btn-danger"  onclick="goDelete()">삭제</button>&nbsp;&nbsp;
+		  <button type="button" class="btn btn-primary" onclick="goList()">목록</button>
+	  </div>
+	</div>
+</form>	
+</div>
+
+<script>
+
+function goList(){
+  frm = document.form; 
+  frm.action="/common/list";
+  frm.method="get";
+  frm.submit();
+}
+
+function goDelete()
+{
+  frm = document.form; 
+  frm.action="/common/delete/{{common_item.id}}";
+  frm.method="get";
+  frm.submit();
+}
+
+</script>
+
+{% endblock %}
